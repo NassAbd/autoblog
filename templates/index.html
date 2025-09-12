@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
+    <title>My Awesome AI Blog</title>
     <style>
         body { font-family: sans-serif; line-height: 1.6; margin: 2em; }
         h1, h2 { color: #333; }
         ul { list-style-type: none; padding: 0; }
-        li { margin-bottom: 1em; }
+        li { margin-bottom: 1.5em; }
         a { text-decoration: none; color: #007bff; }
         a:hover { text-decoration: underline; }
+        .pagination { margin-top: 2em; }
+        .pagination a { margin-right: 1em; }
+        .pagination .current { font-weight: bold; }
     </style>
 </head>
 <body>
@@ -21,12 +24,40 @@
         <h2>Latest Posts</h2>
         <ul>
             {% for post in posts %}
-                <li>
-                    <h3><a href="posts/{{ post.slug }}.html">{{ post.title }}</a></h3>
-                    <p><em>{{ post.date }}</em></p>
-                </li>
+            <li>
+                <h3><a href="posts/{{ post.slug }}.html">{{ post.title }}</a></h3>
+                <p><em>{{ post.date }}</em></p>
+            </li>
             {% endfor %}
         </ul>
+
+        {% if total_pages > 1 %}
+        <div class="pagination">
+            {% if current_page > 1 %}
+                {% if current_page == 2 %}
+                    <a href="/index.html">« Previous</a>
+                {% else %}
+                    <a href="/page/{{ current_page - 1 }}/index.html">« Previous</a>
+                {% endif %}
+            {% endif %}
+
+            {% for page_num in range(1, total_pages + 1) %}
+                {% if page_num == current_page %}
+                    <span class="current">{{ page_num }}</span>
+                {% else %}
+                    {% if page_num == 1 %}
+                        <a href="/index.html">{{ page_num }}</a>
+                    {% else %}
+                        <a href="/page/{{ page_num }}/index.html">{{ page_num }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if current_page < total_pages %}
+                <a href="/page/{{ current_page + 1 }}/index.html">Next »</a>
+            {% endif %}
+        </div>
+        {% endif %}
     </main>
 </body>
 </html>

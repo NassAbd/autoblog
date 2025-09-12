@@ -22,9 +22,10 @@ jobs:
           python-version: "3.11"
 
       - name: Install Python deps
-        run: pip install requests feedparser beautifulsoup4 python-dotenv Jinja2 Markdown
+        run: |
+          pip install requests feedparser beautifulsoup4 python-dotenv Jinja2 Markdown
 
-      - name: Run script to generate post
+      - name: Run script to generate posts
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python py_scripts/generate_post.py
@@ -38,3 +39,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
+          keep_files: false   # Supprime les fichiers existants avant de publier
