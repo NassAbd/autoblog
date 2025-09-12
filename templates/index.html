@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; margin: 2em; }
+        h1, h2 { color: #333; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 1em; }
+        a { text-decoration: none; color: #007bff; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Awesome AI Blog</h1>
+    </header>
+    <main>
+        <h2>Latest Posts</h2>
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <h3><a href="posts/{{ post.slug }}.html">{{ post.title }}</a></h3>
+                    <p><em>{{ post.date }}</em></p>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
