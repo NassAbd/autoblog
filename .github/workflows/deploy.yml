@@ -36,12 +36,20 @@ jobs:
         run: python py_scripts/generate_post.py
 
       - name: Commit new posts to main
-        if: success()
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout main
+
+          # Étape 1 : commit local
           git add content/*.md
           git commit -m "chore: add new AI-generated post" || echo "No changes to commit"
+
+          # Étape 2 : rebase sur origin/main
+          git pull --rebase origin main || true
+
+          # Étape 3 : push
           git push origin main
 
       - name: Build static site
