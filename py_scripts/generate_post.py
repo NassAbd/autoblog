@@ -98,9 +98,19 @@ Write an analysis that goes beyond the news itself.
     response.raise_for_status()
     content = response.json()["choices"][0]["message"]["content"]
 
-    # Nom du fichier = date du jour
     date = datetime.now().strftime("%Y-%m-%d")
-    filename = f"content/{date}-auto-post.md"
+
+    def get_unique_filename(base_dir="content"):
+        counter = 0
+        while True:
+            suffix = f"-{counter}" if counter > 0 else ""
+            filename = f"{base_dir}/{date}-auto-post{suffix}.md"
+            if not os.path.exists(filename):
+                return filename
+            counter += 1
+
+    # Nom du fichier = date du jour
+    filename = get_unique_filename()
 
     # Extraire le titre depuis le premier H1
     title_match = re.search(r"^# (.+)", content, re.MULTILINE)
