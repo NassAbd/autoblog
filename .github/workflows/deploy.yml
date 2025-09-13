@@ -31,6 +31,8 @@ jobs:
         run: python py_scripts/generate_post.py
 
       - name: Build static site
+        env:
+          BASE_URL: /autoblog
         run: python py_scripts/build_site.py
 
       - name: List public dir  # <-- ajoute ici

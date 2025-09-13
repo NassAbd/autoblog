@@ -10,6 +10,7 @@ CONTENT_DIR = "content"
 PUBLIC_DIR = "public"
 TEMPLATES_DIR = "templates"
 POSTS_PER_PAGE = 5
+BASE_URL = os.environ.get("BASE_URL", "")
 
 
 def parse_front_matter(content):
@@ -80,8 +81,10 @@ def main():
         html = index_template.render(
             posts=page_posts,
             current_page=page,
-            total_pages=total_pages
+            total_pages=total_pages,
+            base_url=BASE_URL
         )
+
 
         if page == 1:
             output_path = os.path.join(PUBLIC_DIR, "index.html")
@@ -105,7 +108,8 @@ def main():
         post_html = post_template.render(
             post=post,
             previous_post=previous_post,
-            next_post=next_post
+            next_post=next_post,
+            base_url=BASE_URL
         )
 
         output_path = os.path.join(post_output_dir, f"{post['slug']}.html")
