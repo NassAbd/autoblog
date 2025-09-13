@@ -24,14 +24,14 @@
         </article>
 
         <div class="nav-links">
-            {% if next_post %}
-                <a href="{{ base_url }}/posts/{{ next_post.slug }}.html">{{ next_post.title }} →</a>
+            {% if previous_post %}
+                <a href="{{ base_url }}/posts/{{ previous_post.slug }}.html">← {{ previous_post.title }}</a>
             {% else %}
                 <span></span>
             {% endif %}
 
-            {% if previous_post %}
-                <a href="{{ base_url }}/posts/{{ previous_post.slug }}.html">← {{ previous_post.title }}</a>
+            {% if next_post %}
+                <a href="{{ base_url }}/posts/{{ next_post.slug }}.html">{{ next_post.title }} →</a>
             {% else %}
                 <span></span>
             {% endif %}
