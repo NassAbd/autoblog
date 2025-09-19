@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # nécessaire pour pousser sur gh-pages
+  contents: write
 
 jobs:
   build-deploy:
@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0   # important pour peaceiris/actions-gh-pages
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -30,26 +30,24 @@ jobs:
         run: |
           pip install requests feedparser beautifulsoup4 python-dotenv Jinja2 Markdown
 
+      # ✅ Génération de posts uniquement pour le CRON
       - name: Run script to generate posts
+        if: github.event_name == 'schedule'
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python py_scripts/generate_post.py
 
+      # ✅ Commit des posts générés uniquement pour le CRON
       - name: Commit new posts to main
+        if: github.event_name == 'schedule'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
           git checkout main
-
-          # Étape 1 : commit local
           git add content/*.md
           git commit -m "chore: add new AI-generated post" || echo "No changes to commit"
-
-          # Étape 2 : rebase sur origin/main
           git pull --rebase origin main || true
-
-          # Étape 3 : push
           git push origin main
 
       - name: Build static site
@@ -58,9 +56,7 @@ jobs:
         run: python py_scripts/build_site.py
 
       - name: Check generated files
-        run: |
-          echo "📂 Voici le contenu du dossier public :"
-          ls -R public
+        run: ls -R public
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -68,5 +64,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
-          force_orphan: true   # ⚡ toujours repartir d’une branche propre
-          keep_files: false    # supprime tout avant déploiement
+          force_orphan: true
+          keep_files: false
