@@ -110,9 +110,9 @@
         <div class="pagination">
             {% if current_page > 1 %}
                 {% if current_page == 2 %}
-                    <a href="/index.html">« Previous</a>
+                    <a href="{{base_url}}/index.html">« Previous</a>
                 {% else %}
-                    <a href="/page/{{ current_page - 1 }}/index.html">« Previous</a>
+                    <a href="{{base_url}}/page/{{ current_page - 1 }}/index.html">« Previous</a>
                 {% endif %}
             {% endif %}
 
@@ -121,15 +121,15 @@
                     <span class="current">{{ page_num }}</span>
                 {% else %}
                     {% if page_num == 1 %}
-                        <a href="/index.html">{{ page_num }}</a>
+                        <a href="{{base_url}}/index.html">{{ page_num }}</a>
                     {% else %}
-                        <a href="/page/{{ page_num }}/index.html">{{ page_num }}</a>
+                        <a href="{{base_url}}/page/{{ page_num }}/index.html">{{ page_num }}</a>
                     {% endif %}
                 {% endif %}
             {% endfor %}
 
             {% if current_page < total_pages %}
-                <a href="/page/{{ current_page + 1 }}/index.html">Next »</a>
+                <a href="{{base_url}}/page/{{ current_page + 1 }}/index.html">Next »</a>
             {% endif %}
         </div>
         {% endif %}
