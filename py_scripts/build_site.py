@@ -43,7 +43,7 @@ def paginate(posts, per_page=POSTS_PER_PAGE):
 def main():
     print("🚀 Starting site build...")
 
-    # --- 1. Collect posts ---
+    # --- Collect posts ---
     posts = []
     if os.path.exists(CONTENT_DIR):
         for filename in os.listdir(CONTENT_DIR):
@@ -70,12 +70,12 @@ def main():
     posts.sort(key=lambda p: datetime.strptime(p["date"], "%Y-%m-%d"), reverse=True)
     print(f"✅ Found {len(posts)} posts.")
 
-    # --- 2. Setup Jinja2 environment ---
+    # --- Setup Jinja2 environment ---
     env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
     index_template = env.get_template("index.html")
     post_template = env.get_template("post.html")
 
-    # --- 3. Render index pages with pagination ---
+    # --- Render index pages with pagination ---
     os.makedirs(PUBLIC_DIR, exist_ok=True)
     for page, page_posts, total_pages in paginate(posts):
         html = index_template.render(
@@ -97,7 +97,7 @@ def main():
             f.write(html)
     print(f"✅ Index pages rendered with {POSTS_PER_PAGE} posts per page.")
 
-    # --- 4. Render individual post pages with previous/next navigation ---
+    # --- Render individual post pages with previous/next navigation ---
     post_output_dir = os.path.join(PUBLIC_DIR, "posts")
     os.makedirs(post_output_dir, exist_ok=True)
 

@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "0 0 * * *"   # tous les jours à minuit UTC
+    - cron: "0 0 * * *"   # everyday at 00h UTC
   workflow_dispatch:
 
 permissions:
@@ -30,14 +30,14 @@ jobs:
         run: |
           pip install requests feedparser beautifulsoup4 python-dotenv Jinja2 Markdown
 
-      # ✅ Génération de posts uniquement pour le CRON
+      # Only generate posts on schedule
       - name: Run script to generate posts
         if: github.event_name == 'schedule'
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python py_scripts/generate_post.py
 
-      # ✅ Commit des posts générés uniquement pour le CRON
+      # Commit posts generated only for the CRON
       - name: Commit new posts to main
         if: github.event_name == 'schedule'
         run: |

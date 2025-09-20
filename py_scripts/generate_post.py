@@ -8,11 +8,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Récupérer la clé API Groq depuis les secrets
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 def get_latest_ai_news():
-    """Récupère le dernier article du flux RSS TechCrunch AI"""
+    """Retrieve the latest article from TechCrunch's AI RSS feed"""
     rss_url = "https://techcrunch.com/category/artificial-intelligence/feed/"
     feed = feedparser.parse(rss_url)
     if not feed.entries:
@@ -26,7 +25,7 @@ def get_latest_ai_news():
     }
 
 def fetch_article_content(url):
-    """Télécharge et extrait le contenu principal d’un article TechCrunch"""
+    """Download and extract the main content of a TechCrunch article"""
     resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
@@ -45,18 +44,15 @@ def generate_post():
         "Content-Type": "application/json",
     }
 
-    # Charger le prompt de base
     with open("py_scripts/prompt.txt", "r", encoding="utf-8") as f:
         base_prompt = f.read()
 
-    # Récupérer le dernier article IA
     news = get_latest_ai_news()
     news_context = ""
 
     if news:
         article_text = fetch_article_content(news["link"])
         if article_text:
-            # Tronquer si trop long pour éviter dépassement de tokens
             article_excerpt = article_text[:3000]
 
             news_context = f"""
@@ -81,7 +77,7 @@ Write an analysis that goes beyond the news itself.
     else:
         news_context = "Today's blog post should cover a recent AI or technology trend with fresh insights."
 
-    # Prompt final
+    # Final prompt
     user_prompt = base_prompt + "\n\n" + news_context
 
     json_data = {
@@ -109,20 +105,18 @@ Write an analysis that goes beyond the news itself.
                 return filename
             counter += 1
 
-    # Nom du fichier = date du jour
+    # File name = today's date
     filename = get_unique_filename()
 
-    # Extraire le titre depuis le premier H1
     title_match = re.search(r"^# (.+)", content, re.MULTILINE)
     if not title_match:
-        raise ValueError("❌ Impossible de trouver un titre (# ...) dans le contenu généré.")
+        raise ValueError("Cannot find title in generated content")
 
     title = title_match.group(1).strip()
 
-    # Supprimer le premier H1 du contenu
+    # Remove the first H1 from the content
     content = re.sub(r"^# .+\n+", "", content, count=1, flags=re.MULTILINE)
 
-    # Écrire le fichier Markdown avec front matter correct
     with open(filename, "w", encoding="utf-8") as f:
         f.write(f"""---
 title: "{title}"
@@ -132,7 +126,7 @@ date: {date}
 {content}
 """)
 
-    print(f"✅ Article généré : {filename}")
+    print(f"✅ Generated article : {filename}")
 
 if __name__ == "__main__":
     generate_post()
