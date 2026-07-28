@@ -81,7 +81,7 @@ Write an analysis that goes beyond the news itself.
     user_prompt = base_prompt + "\n\n" + news_context
 
     json_data = {
-        "model": "llama-3.3-70b-versatile",
+        "model": "llama-3.3-70b-versatile", # decomissioned, to be replaced
         "messages": [
             {"role": "system", "content": "You are a helpful AI that writes blog posts."},
             {"role": "user", "content": user_prompt},
