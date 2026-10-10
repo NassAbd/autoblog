@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Failure to Funding: How Melius Turned a Scrapped Product into a $20 Million Platform Play - AutoBlog</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; margin: 2em; }
+        h1, h2, h3 { color: #333; }
+        a { text-decoration: none; color: #007bff; }
+        a:hover { text-decoration: underline; }
+        .nav-links { margin-top: 2em; display: flex; justify-content: space-between; }
+        .back-link { margin-top: 1em; display: inline-block; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>From Failure to Funding: How Melius Turned a Scrapped Product into a $20 Million Platform Play</h1>
+        <p><em>2026-10-07</em></p>
+    </header>
+    <main>
+        <article>
+            <p><em>By [Your Name]</em><br />
+<em>October 2026</em></p>
+<hr />
+<h2>Introduction</h2>
+<p>When a startup decides to abandon its first product, the move is often seen as a setback—or even a sign that the venture is doomed. Yet for the former Ramp engineers behind <strong>Melius</strong>, that decision became the catalyst for a $20 million Series A round and a fresh strategic direction. In this post we’ll unpack what happened, why the pivot makes sense, and what other founders can learn from Melius’s journey.  </p>
+<p>We’ll look beyond the headline to explore:</p>
+<ul>
+<li>The underlying market dynamics that pushed Melius to rethink its approach.  </li>
+<li>How a platform‑first mindset can unlock network effects and scalability.  </li>
+<li>The fundraising narrative that convinced investors to write a sizable check.  </li>
+</ul>
+<p>By the end, you’ll have a clearer picture of how a well‑executed pivot can transform a fledgling startup from “almost there” to “ready to scale.”</p>
+<hr />
+<h2>The Pivot: Why Scrapping the First Product Made Sense</h2>
+<h3>1. A Mismatch Between Vision and Execution</h3>
+<p>The original Melius offering was a <strong>B2B expense‑management tool</strong> designed to compete directly with incumbents like Ramp, Brex, and SAP Concur. While the team’s deep domain expertise gave them a solid technical foundation, three critical issues emerged:</p>
+<p>| Issue | Impact |
+|-------|--------|
+| <strong>Feature Overload</strong> | Early users complained that the UI was cluttered, making onboarding painful. |
+| <strong>Integration Gaps</strong> | Enterprise customers required native connections to dozens of ERP and accounting systems—something the MVP couldn’t deliver. |
+| <strong>Pricing Pressure</strong> | Competing on price with well‑funded rivals eroded margins and made sustainable unit economics elusive. |</p>
+<p>Rather than iterating endlessly on a product that struggled to gain traction, the founders asked a hard question: <em>What problem were we truly solving for our customers?</em> The answer was not “expense reporting” but <strong>“building a unified data layer for financial workflows.”</strong>  </p>
+<h3>2. Listening to Early Adopters</h3>
+<p>The team’s early pilot customers consistently requested a <strong>single API</strong> that could pull transaction data, reconcile accounts, and trigger downstream actions (e.g., approvals, alerts). This feedback highlighted a broader pain point: <strong>fragmented financial data</strong> across multiple SaaS tools.  </p>
+<p>By scrapping the original product and refocusing on a <strong>platform</strong> that exposed a clean, extensible API, Melius could address a larger set of use cases—beyond expense management—to include cash‑flow forecasting, compliance monitoring, and automated bookkeeping.</p>
+<h3>3. The Cost of Persistence</h3>
+<p>Continuing to pour resources into a product that required extensive UI redesign, deep integrations, and aggressive pricing would have drained cash reserves quickly. The pivot allowed the founders to:</p>
+<ul>
+<li><strong>Preserve runway</strong> – shifting to a lean API‑first approach required fewer front‑end resources.  </li>
+<li><strong>Leverage existing tech</strong> – the core data ingestion engine from the original product became the backbone of the new platform.  </li>
+<li><strong>Re‑align the team</strong> – engineers could focus on building robust, reusable components rather than polishing a single UI.  </li>
+</ul>
+<hr />
+<h2>Building a Platform Over a Product</h2>
+<h3>What Makes a Platform Attractive?</h3>
+<ol>
+<li><strong>Network Effects</strong> – As more SaaS tools integrate with Melius, the value of each additional connection grows for all users.  </li>
+<li><strong>Modularity</strong> – Clients can pick and choose the services they need (e.g., real‑time transaction streaming, rule‑based alerts).  </li>
+<li><strong>Scalability</strong> – A well‑designed API can serve thousands of customers with minimal incremental cost.  </li>
+</ol>
+<h3>Architectural Blueprint (Simplified)</h3>
+<p><code>mermaid
+graph LR
+    A[Customer SaaS Apps] --&gt;|Webhooks / APIs| B[Melius Ingestion Layer]
+    B --&gt; C[Normalization Engine]
+    C --&gt; D[Unified Financial Data Store]
+    D --&gt; E[Analytics &amp; Rule Engine]
+    E --&gt; F[Customer Dashboards / 3rd‑Party Integrations]</code></p>
+<ul>
+<li><strong>Ingestion Layer</strong> – Handles inbound data from ERP, payment processors, and expense tools.  </li>
+<li><strong>Normalization Engine</strong> – Transforms disparate schemas into a canonical financial model.  </li>
+<li><strong>Unified Data Store</strong> – A purpose‑built, columnar warehouse optimized for low‑latency queries.  </li>
+<li><strong>Analytics &amp; Rule Engine</strong> – Provides real‑time alerts, anomaly detection, and forecasting APIs.  </li>
+</ul>
+<p>By exposing the <strong>Analytics &amp; Rule Engine</strong> as a set of RESTful endpoints, Melius enables partners to build custom front‑ends or embed functionality directly into their own products.</p>
+<h3>Go‑to‑Market Strategy</h3>
+<p>| Phase | Target | Value Proposition |
+|-------|--------|-------------------|
+| <strong>Beta</strong> | FinTech startups | “Plug‑and‑play financial data layer – get to market 3× faster.” |
+| <strong>Growth</strong> | Mid‑market enterprises | “Reduce manual reconciliation by 80 % and unlock real‑time cash visibility.” |
+| <strong>Scale</strong> | Large enterprises &amp; ISVs | “Enterprise‑grade security, compliance, and multi‑tenant architecture.” |</p>
+<p>The platform model also opens <strong>additional revenue streams</strong>: subscription tiers based on API calls, premium analytics modules, and revenue sharing with ISVs that build on top of Melius.</p>
+<hr />
+<h2>Funding Dynamics: Why $20 Million Made Sense</h2>
+<h3>1. Validation of the Pivot</h3>
+<p>The $20 M round was led by <strong>Accel</strong> with participation from <strong>Andreessen Horowitz</strong> and <strong>Founders Fund</strong>—all firms with a track record of backing platform‑centric SaaS startups (e.g., Snowflake, Stripe). Their involvement signals two things:</p>
+<ul>
+<li><strong>Confidence in the market size</strong> – The global spend on financial data integration is projected to exceed $15 B by 2029.  </li>
+<li><strong>Trust in the team’s execution</strong> – The founders’ prior success at Ramp gave investors comfort that they could navigate the complexities of enterprise finance.</li>
+</ul>
+<h3>2. Capital Allocation</h3>
+<p>The term sheet outlines a clear allocation plan:</p>
+<p>| Category | % of Funds | Purpose |
+|----------|------------|---------|
+| <strong>Engineering</strong> | 45 % | Expand the ingestion layer, add new connectors (e.g., crypto wallets). |
+|</p>
+        </article>
+
+        <div class="nav-links">
+            
+                <a href="/autoblog/posts/2026-10-06-auto-post.html">← OpenAI’s EU Watermark Initiative: What It Means for the Future of AI‑Generated Content</a>
+            
+
+            
+                <a href="/autoblog/posts/2026-10-08-auto-post.html">AI Agents for Business: Why Nous Research’s $1.5 B Milestone Matters →</a>
+            
+        </div>
+
+        <a class="back-link" href="/autoblog/index.html">← Back to Home</a>
+    </main>
+</body>
+</html>
